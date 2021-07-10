@@ -59,7 +59,7 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .components(new Components())
-                .info(new Info().title("Order Application API").description(
+                .info(new Info().title("Credit card Application API").description(
                         "This is a sample Spring Boot RESTful service using springdoc-openapi and OpenAPI 3."));
     }
 }
