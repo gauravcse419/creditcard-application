@@ -1,5 +1,7 @@
 package com.hcl.hackathon.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -11,6 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="cibil_score")
 @NamedQuery(name="CibilScore.findAll", query="SELECT c FROM CibilScore c")
+@Data
 public class CibilScore implements Serializable {
 	private static final long serialVersionUID = 1L;
 
