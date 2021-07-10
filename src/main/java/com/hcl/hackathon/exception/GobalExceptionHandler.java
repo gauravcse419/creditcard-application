@@ -40,6 +40,20 @@ public class GobalExceptionHandler {
     }
 
     /**
+     * Handle 412 error error response.
+     *
+     * @param e the e
+     * @return the error response
+     */
+    @ExceptionHandler(CreditAppException.class)
+    @ResponseStatus(value = HttpStatus.PRECONDITION_FAILED)
+    @ResponseBody
+    public ErrorResponse handle404Error(CreditAppException e) {
+        return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
+
+    }
+
+    /**
      * Handle 500 error error response.
      *
      * @return the error response
