@@ -1,5 +1,7 @@
 package com.hcl.hackathon.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +14,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Customer.findAll", query="SELECT c FROM Customer c")
+@Data
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -31,6 +34,7 @@ public class Customer implements Serializable {
 
 	@Column(name="email_id")
 	private String emailId;
+
 
 	private String pancard;
 

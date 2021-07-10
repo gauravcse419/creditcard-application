@@ -2,6 +2,7 @@ package com.hcl.hackathon.model;
 
 import java.util.Objects;
 
+import com.hcl.hackathon.entity.Customer;
 import org.springframework.validation.annotation.Validated;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,7 +21,7 @@ public class CreditLimitDetail   {
   @JsonProperty("panCard")
   private String panCard = null;
 
-  @JsonProperty("cibilLimit")
+  @JsonProperty("creditLimit")
   private Integer cibilLimit = null;
 
   public CreditLimitDetail name(String name) {
@@ -106,5 +107,8 @@ public class CreditLimitDetail   {
     }
     return o.toString().replace("\n", "\n    ");
   }
+
+
+
 }
 

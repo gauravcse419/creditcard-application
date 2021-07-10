@@ -10,4 +10,9 @@ public class CreditcardApplication {
 		SpringApplication.run(CreditcardApplication.class, args);
 	}
 
+	/*@Bean
+	public CreditService creditService(){
+		new CreditServiceImpl()
+	}*/
+
 }
