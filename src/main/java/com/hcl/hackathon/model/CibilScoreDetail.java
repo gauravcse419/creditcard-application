@@ -1,16 +1,8 @@
 package com.hcl.hackathon.model;
 
 import java.util.Objects;
-
-import org.springframework.validation.annotation.Validated;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * CibilScoreDetail
- */
-@Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2021-07-10T10:21:27.147Z")
 
 
 public class CibilScoreDetail   {

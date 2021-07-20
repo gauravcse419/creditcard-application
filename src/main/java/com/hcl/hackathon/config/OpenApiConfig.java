@@ -60,6 +60,6 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .components(new Components())
                 .info(new Info().title("Credit card Application API").description(
-                        "This is a sample Spring Boot RESTful service using springdoc-openapi and OpenAPI 3."));
+                        "This is a Credit Card Application Processing"));
     }
 }

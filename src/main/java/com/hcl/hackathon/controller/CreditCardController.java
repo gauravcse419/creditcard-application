@@ -33,7 +33,7 @@ public class CreditCardController {
     public String createCreditCard(
             @Parameter(description = "Credit to add. Cannot null or empty.",
                     required = true, schema = @Schema(implementation = Customer.class))
-            @Valid @RequestBody Customer Customer) {
+            @Valid @RequestBody Customer Customer) throws Exception {
         return this.creditService.createCreditCard(Customer);
     }
 

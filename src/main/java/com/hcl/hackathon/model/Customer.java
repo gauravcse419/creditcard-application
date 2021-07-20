@@ -1,14 +1,9 @@
 package com.hcl.hackathon.model;
-
-import java.util.Objects;
-
-import javax.validation.constraints.NotNull;
-
+import com.sun.istack.internal.NotNull;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.springframework.validation.annotation.Validated;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * Customer
@@ -32,8 +27,7 @@ public class Customer   {
           example = "test@gmail.com", required = false)
   private String emailId = null;
 
-  @Schema(description = "pancard",
-          example = "BIHH32222222", required = false)
+  @NotEmpty
   private String pancard = null;
 
   @Schema(description = "annualSalary",

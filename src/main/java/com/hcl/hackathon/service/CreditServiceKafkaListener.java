@@ -11,13 +11,8 @@ public class CreditServiceKafkaListener {
 
     private static final Logger logger = LoggerFactory.getLogger(CreditServiceKafkaListener.class);
 
-
-
-    @KafkaListener(topics = "${message.topic.name}", containerFactory = "customerRequestKafkaListenerContainerFactory")
-    public void userRequestListener(Customer customer) {
-
-        logger.info("UserServiceListener class creditCardRequestListener method end{} "+ customer.getPancard() );
-
-
+    @KafkaListener(topics = "my_topic", groupId = "anand_group_id")
+    public void userRequestListener(String customer) {
+        logger.info("CreditServiceKafkaListener class creditCardRequestListener method end{} "+ customer );
     }
 }

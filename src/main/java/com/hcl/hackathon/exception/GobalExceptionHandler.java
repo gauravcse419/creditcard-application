@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @RestControllerAdvice
 public class GobalExceptionHandler {
+
     /**
      * Handle 404 error error response.
      *
@@ -23,6 +24,19 @@ public class GobalExceptionHandler {
     public ErrorResponse handle404Error(ResourceNotFoundException e) {
         return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
 
+    }
+
+    /**
+     * Handle 400 error error response.
+     *
+     * @param e the e
+     * @return the error response
+     */
+    @ExceptionHandler(BadRequest.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handle400Error(BadRequest e) {
+        return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
     }
 
     /**

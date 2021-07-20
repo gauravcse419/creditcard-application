@@ -1,0 +1,27 @@
+spring:
+  kafka:
+    consumer:
+      bootstarp-servers: localhost:9092
+      group-id: "anand_group_id"
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstarp-servers: locahost:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=hackathon
+    username: postgres
+    password: postgres
+    jpa:
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+
+      hibernate:
+        ddl-auto: create
+
+server:
+  port: 9095
+cibilServicesUrl: CibilServiceUrl;

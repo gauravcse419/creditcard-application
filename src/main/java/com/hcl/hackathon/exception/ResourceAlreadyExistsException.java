@@ -38,30 +38,15 @@
  */
 package com.hcl.hackathon.exception;
 
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
+@Data
 public class ResourceAlreadyExistsException extends RuntimeException {
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
     private final int errorCode;
     private final String errorMessage;
-
-
-    public int getErrorCode() {
-        return errorCode;
-    }
-
-
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
 
     public ResourceAlreadyExistsException(int errorCode, String errorMessage) {
         super();

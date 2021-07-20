@@ -1,5 +1,6 @@
 package com.hcl.hackathon.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hcl.hackathon.entity.ApplicationDetail;
 import com.hcl.hackathon.exception.CreditAppException;
 import com.hcl.hackathon.model.CibilScoreDetail;
@@ -24,11 +25,11 @@ public class CreditServiceImpl  implements CreditService{
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Value(value = "${message.topic.name}")
-    private String topicName;
+
+    private static final String TOPIC= "my_topic";
 
     @Autowired
-    private KafkaTemplate<String, Customer> kafkaTemplate;
+    private KafkaTemplate<String, Object> kafka;
 
     @Autowired
     private CreditCardRepository repository;
@@ -40,11 +41,17 @@ public class CreditServiceImpl  implements CreditService{
     private String cibilServiceUrl;
 
     @Override
-    public String createCreditCard(Customer customer) {
+    public String createCreditCard(Customer customer) throws Exception {
         publishToKafka(customer);
         return "published successfully";
     }
 
+    /**
+     * Method to process the application
+     *
+     * @param applicationId
+     * @return CustomerDetail
+     */
     @Override
     public CustomerDetail processingCreditCardApplication(String applicationId) {
         logger.info("CreditServiceImpl processingCreditCardApplication {}");
@@ -53,9 +60,9 @@ public class CreditServiceImpl  implements CreditService{
         if(!applicationDetails.isPresent()) {
             throw new CreditAppException(HttpStatus.PRECONDITION_FAILED.value(), "Application Id does not exists");
         }
-        CibilScoreDetail cibilScoreDetail = restTemplate.getForObject(cibilServiceUrl, CibilScoreDetail.class);
         ApplicationDetail applicationDetail = applicationDetails.get();
-        if(cibilScoreDetail.getCibilScore()<800) {
+        CibilScoreDetail cibilScoreDetail = restTemplate.getForObject(cibilServiceUrl+applicationDetail.getPanCard(), CibilScoreDetail.class);
+        if(cibilScoreDetail.getCibilScore()>800) {
             applicationDetail.setStatus(applicationStatus.APPROVED.name());
             this.repository.save(applicationDetail);
             customerDetail.setApplicationId(String.valueOf(applicationDetail.getApplicationNo()));
@@ -69,8 +76,11 @@ public class CreditServiceImpl  implements CreditService{
         return customerDetail;
     }
 
-    public void publishToKafka(Customer customer) {
-        kafkaTemplate.send(topicName, customer);
-
+    public void publishToKafka(Customer customer) throws Exception {
+        this.logger.info("customer"+customer);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String customerEvent = objectMapper.writeValueAsString(customer);
+        kafka.send(TOPIC, customerEvent);
+        this.logger.info("customer12345"+customer);
     }
 }
